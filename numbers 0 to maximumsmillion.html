@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<center><font size="8" id="number1"></font></center>
+<center><font size="6" id="ElapsedTime"></font></center>
+<body>
+<script>
+var currentNumber = 0;
+var t = 0;
+var value = 0;
+var INTERVAL = 12.5;
+function outputNumber() {
+  if ((1000000 ** (currentNumber / 500000) - 1) < 303) {
+    if ((1000000 ** (currentNumber / 500000) - 1) < 18) {
+	    currentNumber = Math.min(t.toFixed(2), 500000)
+	    document.getElementById("number1").innerHTML = (10 ** (1000000 ** (currentNumber / 500000) - 1) - 1).toPrecision(18).toUpperCase("e");
+      document.getElementById("ElapsedTime").innerHTML = "Nanoseconds elapsed: " + BigInt(Math.round((INTERVAL + Math.random()) * 1000000) - 500000).toLocaleString("en-US");
+      value += 0.00078125;
+  	  t += value;
+      INTERVAL += 25;
+    } else {
+      currentNumber = Math.min(t.toFixed(2), 500000)
+	    document.getElementById("number1").innerHTML = (10 ** (1000000 ** (currentNumber / 500000) - 1) % 1).toPrecision(5) + "E" + Math.floor((1000000 ** (currentNumber / 500000) - 1) - 1);
+      document.getElementById("ElapsedTime").innerHTML = "Nanoseconds elapsed: " + BigInt(Math.round((INTERVAL + Math.random()) * 1000000) - 500000).toLocaleString("en-US");
+      value += 0.00078125;
+  	  t += value;
+      INTERVAL += 25;
+    }
+  } else {
+	  currentNumber = Math.min(Math.floor(t), 500000)
+	  document.getElementById("number1").innerHTML = "10<sup>" + (1000000 ** (currentNumber / 500000)).toPrecision(7).replace("Infinity","inf").replace("NaN","nan") + "</sup>";
+    document.getElementById("ElapsedTime").innerHTML = "Nanoseconds elapsed: " + BigInt(Math.round((INTERVAL + Math.random()) * 1000000) - 500000).toLocaleString("en-US");
+    value += 0.00078125;
+	  t += value;
+    INTERVAL += 25;
+  }
+}
+setInterval(outputNumber, 25);
+</script>
+</body>
+</html>
